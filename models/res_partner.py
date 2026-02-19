@@ -17,4 +17,4 @@ class SaleOrder(models.Model):
     # 'related' makes Odoo pull the value from the customer automatically
     # 'readonly=False' allows salesperson to override it on a specific order if needed
     cust_branding_type = fields.Selection(related='partner_id.branding_type', string='Customer Branding Type', readonly=False, store=True)
-    cust_brand_name = fields.Char(related='partner_id.brand_name', string='Customer Brand Name', readonly=False, store=True)
+    cust_brand_name = fields.Char(related='partner_id.brand_name', string='Customer Brand Name', readonly=True, store=True)

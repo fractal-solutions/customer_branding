@@ -20,7 +20,7 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='partner_id']" position="after">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
                 <field name="cust_branding_type" widget="badge"
                        decoration-info="cust_branding_type == 'joint'"
                        decoration-warning="cust_branding_type == 'own'"/>
@@ -28,4 +28,31 @@
             </xpath>
         </field>
     </record>
+
+    <template id="report_saleorder_document_branding" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="after">
+            <div t_if="doc.cust_branding_type != 'default'"
+                 style="margin-top: 20px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;">
+                <strong>Branding Requirement:</strong>
+                <span t-field="doc.cust_branding_type"/>
+                <t t-if="doc.cust_brand_name">
+                    - <span t-field="doc.cust_brand_name"/>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="report_delivery_document_branding" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div t_if="o.sale_id.cust_branding_type != 'default'"
+                style="background-color: #FFEEAA; padding: 10px; border: 2px solid black; margin-top: 10px;">
+                <strong style="text-transform: uppercase;">⚠️ Factory Labeling Instructions:</strong>
+                <br/>
+                Type: <span t-field="o.sale_id.cust_branding_type"/>
+                <t t-if="o.sale_id.cust_brand_name">
+                    | Brand: <span t-field="o.sale_id.cust_brand_name"/>
+                </t>
+            </div>
+        </xpath>
+    </template>
 </odoo>
