@@ -1,0 +1,31 @@
+<odoo>
+    <record id="view_partner_form_branding" model="ir.ui.view">
+        <field name="name">res.partner.form.branding</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Branding" name="branding_tab">
+                    <group>
+                        <field name="branding_type"/>
+                        <field name="brand_name" invisible="branding_type == 'default'"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+ 
+    <record id="view_order_form_branding" model="ir.ui.view">
+        <field name="name">sale.order.form.branding</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="cust_branding_type" widget="badge"
+                       decoration-info="cust_branding_type == 'joint'"
+                       decoration-warning="cust_branding_type == 'own'"/>
+                <field name="cust_brand_name" invisible="cust_branding_type == 'default'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
