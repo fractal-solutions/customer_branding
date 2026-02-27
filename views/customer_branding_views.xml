@@ -16,7 +16,7 @@
         </field>
     </record>
 
-    <record id="view_order_form_branding" model="ir.ui.view">
+    <record id="view_order_form_branding_approval" model="ir.ui.view">
         <field name="name">sale.order.form.branding</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
@@ -28,6 +28,10 @@
                 <field name="cust_brand_name" invisible="cust_branding_type == 'default'"/>
             </xpath>
         </field>
+    </record>
+
+    <record id="purchase_order_form_approval_inherit" model="ir.ui.view">
+        <field name="active" eval="False"/>
     </record>
 
     <template id="report_saleorder_document_branding" inherit_id="sale.report_saleorder_document">
