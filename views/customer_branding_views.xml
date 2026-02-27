@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_partner_form_branding" model="ir.ui.view">
         <field name="name">res.partner.form.branding</field>
@@ -14,7 +15,7 @@
             </xpath>
         </field>
     </record>
- 
+
     <record id="view_order_form_branding" model="ir.ui.view">
         <field name="name">sale.order.form.branding</field>
         <field name="model">sale.order</field>
@@ -22,8 +23,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <field name="cust_branding_type" widget="badge"
-                       decoration-info="cust_branding_type == 'joint'"
-                       decoration-warning="cust_branding_type == 'own'"/>
+                    decoration-info="cust_branding_type == 'joint'"
+                    decoration-warning="cust_branding_type == 'own'"/>
                 <field name="cust_brand_name" invisible="cust_branding_type == 'default'"/>
             </xpath>
         </field>
@@ -31,41 +32,23 @@
 
     <template id="report_saleorder_document_branding" inherit_id="sale.report_saleorder_document">
         <xpath expr="//div[@id='informations']" position="after">
-            <div t_if="doc.cust_branding_type != 'default'"
+            <div t_if="doc.cust_branding_type != 'default'" 
                  style="margin-top: 20px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;">
                 <strong>Branding Requirement:</strong>
-                <span t-field="doc.cust_branding_type"/>
-                <t t-if="doc.cust_brand_name">
-                    - <span t-field="doc.cust_brand_name"/>
-                </t>
-            </div>
-        </xpath>
-    </template>
-
-    <template id="portal_my_orders_branding" inherit_id="sale.sale_order_portal_content">
-        <xpath expr="//div[@id='introduction']" position="after">
-            <div t_if="sale_order.cust_branding_type != 'default'"
-                 class="alert alert-info mt-3"
-                 role="alert">
-                <strong>Branding Requirement:</strong>
-                <span t-field="sale_order.cust_branding_type"/>
-                <t t-if="sale_order.cust_brand_name">
-                    - <span t-field="sale_order.cust_brand_name"/>
-                </t>
+                <span t-field="doc.cust_branding_type"/> 
+                <t t-if="doc.cust_brand_name"> - <span t-field="doc.cust_brand_name"/></t>
             </div>
         </xpath>
     </template>
 
     <template id="report_delivery_document_branding" inherit_id="stock.report_delivery_document">
         <xpath expr="//div[@name='div_sched_date']" position="after">
-            <div t_if="o.sale_id.cust_branding_type != 'default'"
-                style="background-color: #FFEEAA; padding: 10px; border: 2px solid black; margin-top: 10px;">
+            <div t_if="o.sale_id and o.sale_id.cust_branding_type != 'default'" 
+                 style="background-color: #FFEEAA; padding: 10px; border: 2px solid black; margin-top: 10px;">
                 <strong style="text-transform: uppercase;">⚠️ Factory Labeling Instructions:</strong>
                 <br/>
                 Type: <span t-field="o.sale_id.cust_branding_type"/>
-                <t t-if="o.sale_id.cust_brand_name">
-                    | Brand: <span t-field="o.sale_id.cust_brand_name"/>
-                </t>
+                <t t-if="o.sale_id.cust_brand_name"> | Brand: <span t-field="o.sale_id.cust_brand_name"/></t>
             </div>
         </xpath>
     </template>

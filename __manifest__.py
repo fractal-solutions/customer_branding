@@ -6,7 +6,7 @@
     'description': """
         This module provides custom branding labels for customers.
     """,
-    'depends': ['base', 'sale'],
+    'depends': ['base', 'sale', 'stock'],
     'data': [
         'views/customer_branding_views.xml',
     ],
