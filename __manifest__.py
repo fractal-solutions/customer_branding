@@ -8,6 +8,7 @@
     """,
     'depends': ['base', 'sale', 'stock'],
     'data': [
+        'security/ir.model.access.csv',
         'views/customer_branding_views.xml',
     ],
     'installable': True,
